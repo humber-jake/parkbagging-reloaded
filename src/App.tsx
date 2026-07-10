@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 
 import parks from "./data/parks.json";
-import type { Park } from "./types/Park";
 import type { Ride } from "./types/Ride";
 import { calculateDistance } from "./utils/distance";
 

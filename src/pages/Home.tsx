@@ -1,4 +1,3 @@
-import type { Park } from "../types/Park";
 import type { Ride } from "../types/Ride";
 import { formatTime } from "../utils/time";
 import { formatDate } from "../utils/date";
