@@ -10,10 +10,18 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
+}
 
-  background: linear-gradient(-45deg, #46c8f9, #2fedb3);
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  background: linear-gradient(-45deg, #46c8f9 0%, #2fedb3 100%);
+
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {
@@ -58,17 +66,21 @@ h1 {
 .nav a:hover {
   opacity: 0.75;
 }
+
 .home,
 .admin {
-  /* min-height: 80vh; */
   width: 100%;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  padding: 2rem;
+  padding: 1rem;
+}
+
+.home {
+  justify-content: center;
+  min-height: calc(100dvh - 70px);
 }
 
 .ride-card {
@@ -204,7 +216,7 @@ h1 {
   width: 100%;
   max-width: 300px;
 
-  margin: 1rem;
+  margin: 1rem 0;
 
   padding: 0.9rem;
 
@@ -257,4 +269,60 @@ h1 {
   border-top: 1px solid #eee;
 
   text-align: left;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .nav {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-links {
+    gap: 0.75rem;
+  }
+
+  .nav a {
+    font-size: 0.95rem;
+  }
+
+  .ride-card {
+    width: calc(100vw - 2rem);
+    padding: 2rem 1.25rem;
+    border-radius: 18px;
+  }
+
+  .logo {
+    font-size: 2.25rem;
+  }
+
+  .date {
+    font-size: 1rem;
+  }
+
+  .parks h2 {
+    font-size: 1.5rem;
+  }
+
+  .length {
+    font-size: 1.1rem;
+  }
+
+  .emojis {
+    font-size: 2rem;
+  }
+
+  .admin-card {
+    width: calc(100vw - 2rem);
+    padding: 1.5rem;
+  }
+
+  .admin input,
+  .admin .date-time-input,
+  .admin button {
+    max-width: none;
+    width: 100%;
+  }
 }
