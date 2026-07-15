@@ -10,6 +10,7 @@ import { calculateDistance } from "./utils/distance";
 
 export default function App() {
   const [ride, setRide] = useState<Ride | null>(null);
+  const [draftRide, setDraftRide] = useState<Ride | null>(null);
 
   function generateRide(date: string, time: string) {
     const firstIndex = Math.floor(Math.random() * parks.length);
@@ -30,13 +31,19 @@ export default function App() {
       park2.googlemapdest.lon,
     );
 
-    setRide({
+    setDraftRide({
       park1,
       park2,
       date,
       time,
       distance,
     });
+  }
+
+  function saveRide() {
+    if (draftRide) {
+      setRide(draftRide);
+    }
   }
 
   return (
@@ -53,7 +60,13 @@ export default function App() {
 
         <Route
           path="/admin"
-          element={<Admin generateRide={generateRide} ride={ride} />}
+          element={
+            <Admin
+              ride={draftRide}
+              generateRide={generateRide}
+              saveRide={saveRide}
+            />
+          }
         />
       </Routes>
     </>

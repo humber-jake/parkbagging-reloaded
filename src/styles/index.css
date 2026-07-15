@@ -326,3 +326,15 @@ h1 {
     width: 100%;
   }
 }
+
+.save-button:disabled {
+  background: #e6e6e6;
+}
+
+.save-button:hover:disabled {
+  cursor: not-allowed;
+  background: #ededed;
+}
+.save-button:hover {
+  background: #2b9c5a;
+}

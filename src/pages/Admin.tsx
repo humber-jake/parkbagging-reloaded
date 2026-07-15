@@ -3,15 +3,17 @@ import type { Ride } from "../types/Ride";
 import "../styles/index.css";
 import { formatDate } from "../utils/date";
 import { formatTime } from "../utils/time";
+import "../styles/index.css";
 
 const ADMIN_PIN = "1234";
 
 interface AdminProps {
   generateRide: (date: string, time: string) => void;
   ride: Ride | null;
+  saveRide: () => void;
 }
 
-export default function Admin({ generateRide, ride }: AdminProps) {
+export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("18:30");
   const [pin, setPin] = useState("");
@@ -46,7 +48,7 @@ export default function Admin({ generateRide, ride }: AdminProps) {
 
   return (
     <div className="admin">
-      <h1>Admin</h1>
+      <h2>Admin</h2>
 
       <div>
         <label>
@@ -73,6 +75,10 @@ export default function Admin({ generateRide, ride }: AdminProps) {
       </div>
 
       <button onClick={() => generateRide(date, time)}>Generate</button>
+
+      <button className="save-button" onClick={saveRide} disabled={!ride}>
+        Save Ride
+      </button>
 
       {ride && (
         <div className="ride-card">
