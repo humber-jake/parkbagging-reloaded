@@ -39,9 +39,7 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
           onChange={(e) => setPin(e.target.value)}
         />
 
-        <button onClick={login} style={{ marginLeft: "1rem" }}>
-          Login
-        </button>
+        <button onClick={login}>Login</button>
       </div>
     );
   }
