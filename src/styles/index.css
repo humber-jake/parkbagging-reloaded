@@ -323,7 +323,7 @@ h1 {
   .admin .date-time-input,
   .admin button {
     max-width: none;
-    width: 100%;
+    /* width: 100%; */
   }
 }
 
