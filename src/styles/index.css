@@ -78,6 +78,68 @@ h1 {
   padding: 1rem;
 }
 
+.home-teaser {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Instead of center */
+  justify-content: flex-start;
+
+  padding-top: 6vh;
+}
+
+.teaser-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 35%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.8) 60%,
+    #000 70%
+  );
+}
+
+.continue {
+  font-size: 1.5rem;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  position: fixed;
+
+  left: 50%;
+  bottom: 20vh;
+
+  transform: translateX(-50%);
+
+  z-index: 11;
+
+  width: 90%;
+
+  text-align: center;
+
+  color: white;
+}
+
+.cursor {
+  animation: blink 1s steps(1, start) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 .home {
   justify-content: center;
   min-height: calc(100dvh - 70px);
@@ -98,6 +160,13 @@ h1 {
   font-size: 3rem;
   font-weight: 700;
   margin: 0 0 1rem;
+}
+
+.logo-image {
+  width: min(90vw, 600px);
+  height: auto;
+
+  margin-bottom: 1.5rem;
 }
 
 .date {
