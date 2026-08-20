@@ -2,13 +2,14 @@ import type { Ride } from "../types/Ride";
 import { formatTime } from "../utils/time";
 import { formatDate } from "../utils/date";
 import { calculateDistance } from "../utils/distance";
+import Map from "../components/Map";
 import "../styles/index.css";
 
 interface HomeProps {
   ride: Ride | null;
 }
 
-const teaser = true;
+const teaser = false;
 
 export default function Home({ ride }: HomeProps) {
   let distance = 0;
@@ -24,7 +25,13 @@ export default function Home({ ride }: HomeProps) {
 
   return (
     <div className={teaser ? "home-teaser" : "home"}>
-      <img className="logo-image" src="/logo.png" alt="Parkbagging-reloaded" />
+      {!ride && (
+        <img
+          className={"logo-image"}
+          src="/logo.png"
+          alt="Parkbagging-reloaded"
+        />
+      )}
 
       {teaser && (
         <>
@@ -47,17 +54,22 @@ export default function Home({ ride }: HomeProps) {
               <>
                 <h2>{ride.park1.name}</h2>
                 <h2>{ride.park2.name}</h2>
+                <Map park1={ride.park1} park2={ride.park2} />
               </>
             ) : (
               <h2>No parks selected yet</h2>
             )}
           </div>
 
-          {ride && <h3 className="length">Ride Length - {distance}km</h3>}
+          {ride && (
+            <>
+              <h3 className="length">Ride Length - {distance}km</h3>
 
-          <p className="time">
-            Meet @ {ride ? formatTime(ride.time) : "--:--"}(ish)
-          </p>
+              <p className="time">
+                Meet @ {ride ? formatTime(ride.time) : "--:--"}(ish)
+              </p>
+            </>
+          )}
 
           <div className="emojis">🚲🍻</div>
         </div>

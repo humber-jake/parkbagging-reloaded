@@ -3,6 +3,7 @@ import type { Ride } from "../types/Ride";
 import "../styles/index.css";
 import { formatDate } from "../utils/date";
 import { formatTime } from "../utils/time";
+import Map from "../components/Map";
 import "../styles/index.css";
 
 const ADMIN_PIN = "1234";
@@ -39,15 +40,15 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
           onChange={(e) => setPin(e.target.value)}
         />
 
-        <button onClick={login}>Login</button>
+        <div className="admin-buttons">
+          <button onClick={login}>Login</button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="admin">
-      <h2>Admin</h2>
-
       <div>
         <label>
           Date:
@@ -72,11 +73,9 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
         </label>
       </div>
 
-      <button onClick={() => generateRide(date, time)}>Generate</button>
-
-      <button className="save-button" onClick={saveRide} disabled={!ride}>
-        Save Ride
-      </button>
+      <div className="admin-buttons">
+        <button onClick={() => generateRide(date, time)}>Generate</button>
+      </div>
 
       {ride && (
         <div className="ride-card">
@@ -90,6 +89,7 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
               <>
                 <h2>{ride.park1.name}</h2>
                 <h2>{ride.park2.name}</h2>
+                <Map park1={ride.park1} park2={ride.park2} />
               </>
             ) : (
               <h2>No parks selected yet</h2>
@@ -105,6 +105,12 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
           <div className="emojis">🚲🍻</div>
         </div>
       )}
+
+      <div className="admin-buttons">
+        <button className="save-button" onClick={saveRide} disabled={!ride}>
+          Save Ride
+        </button>
+      </div>
     </div>
   );
 }

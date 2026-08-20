@@ -13,31 +13,35 @@ export default function App() {
   const [draftRide, setDraftRide] = useState<Ride | null>(null);
 
   function generateRide(date: string, time: string) {
-    const firstIndex = Math.floor(Math.random() * parks.length);
+    let distance = 0;
 
-    let secondIndex = Math.floor(Math.random() * parks.length);
+    while (!(distance > 3 && distance < 10)) {
+      const firstIndex = Math.floor(Math.random() * parks.length);
 
-    while (secondIndex === firstIndex) {
-      secondIndex = Math.floor(Math.random() * parks.length);
+      let secondIndex = Math.floor(Math.random() * parks.length);
+
+      while (secondIndex === firstIndex) {
+        secondIndex = Math.floor(Math.random() * parks.length);
+      }
+
+      const park1 = parks[firstIndex];
+      const park2 = parks[secondIndex];
+
+      distance = calculateDistance(
+        park1.googlemapdest.lat,
+        park1.googlemapdest.lon,
+        park2.googlemapdest.lat,
+        park2.googlemapdest.lon,
+      );
+
+      setDraftRide({
+        park1,
+        park2,
+        date,
+        time,
+        distance,
+      });
     }
-
-    const park1 = parks[firstIndex];
-    const park2 = parks[secondIndex];
-
-    const distance = calculateDistance(
-      park1.googlemapdest.lat,
-      park1.googlemapdest.lon,
-      park2.googlemapdest.lat,
-      park2.googlemapdest.lon,
-    );
-
-    setDraftRide({
-      park1,
-      park2,
-      date,
-      time,
-      distance,
-    });
   }
 
   function saveRide() {
@@ -49,6 +53,13 @@ export default function App() {
   return (
     <>
       <nav className="nav">
+        {ride && (
+          <img
+            className={"nav-logo"}
+            src="/logo.png"
+            alt="Parkbagging-reloaded"
+          />
+        )}
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/admin">Admin</Link>
