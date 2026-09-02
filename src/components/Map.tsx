@@ -20,19 +20,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-const park1Icon = L.divIcon({
-  html: "1️⃣",
-  className: "emoji-marker",
-  iconSize: [20, 20],
-  iconAnchor: [20, 20],
-});
-const park2Icon = L.divIcon({
-  html: "2️⃣",
-  className: "emoji-marker",
-  iconSize: [20, 20],
-  iconAnchor: [20, 20],
-});
-
 export default function Map({ park1, park2 }: ParkMapProps) {
   return (
     <MapContainer
