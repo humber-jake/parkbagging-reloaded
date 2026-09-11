@@ -7,25 +7,46 @@ import Admin from "./pages/Admin";
 import parks from "./data/parks.json";
 import type { Ride } from "./types/Ride";
 import { calculateDistance } from "./utils/distance";
+import type { Park } from "./types/Park";
 
 export default function App() {
   const [ride, setRide] = useState<Ride | null>(null);
   const [draftRide, setDraftRide] = useState<Ride | null>(null);
 
-  function generateRide(date: string, time: string) {
+  function generateRide(
+    date: string,
+    time: string,
+    seedPark1: string,
+    seedPark2: string,
+  ) {
+    if (seedPark1 && seedPark1 === seedPark2) {
+      return;
+    }
+
     let distance = 0;
 
     while (!(distance > 3 && distance < 10)) {
-      const firstIndex = Math.floor(Math.random() * parks.length);
+      let park1: Park;
+      let park2: Park;
 
-      let secondIndex = Math.floor(Math.random() * parks.length);
-
-      while (secondIndex === firstIndex) {
-        secondIndex = Math.floor(Math.random() * parks.length);
+      // Get park 1
+      if (seedPark1) {
+        park1 = parks.find((park) => park.name === seedPark1)!;
+      } else {
+        park1 = parks[Math.floor(Math.random() * parks.length)];
       }
 
-      const park1 = parks[firstIndex];
-      const park2 = parks[secondIndex];
+      // Get park 2
+      if (seedPark2) {
+        park2 = parks.find((park) => park.name === seedPark2)!;
+      } else {
+        park2 = parks[Math.floor(Math.random() * parks.length)];
+
+        // Don't randomly select the same park as park 1
+        while (park2.name === park1.name) {
+          park2 = parks[Math.floor(Math.random() * parks.length)];
+        }
+      }
 
       distance = calculateDistance(
         park1.googlemapdest.lat,

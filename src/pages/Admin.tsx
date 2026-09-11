@@ -5,18 +5,26 @@ import { formatDate } from "../utils/date";
 import { formatTime } from "../utils/time";
 import Map from "../components/Map";
 import "../styles/index.css";
+import parks from "../data/parks.json";
 
 const ADMIN_PIN = "1234";
 
 interface AdminProps {
-  generateRide: (date: string, time: string) => void;
   ride: Ride | null;
+  generateRide: (
+    date: string,
+    time: string,
+    seedPark1: string,
+    seedPark2: string,
+  ) => void;
   saveRide: () => void;
 }
 
 export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("18:30");
+  const [seedPark1, setSeedPark1] = useState("");
+  const [seedPark2, setSeedPark2] = useState("");
   const [pin, setPin] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -60,7 +68,6 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
           />
         </label>
       </div>
-
       <div>
         <label>
           Time:
@@ -73,8 +80,48 @@ export default function Admin({ generateRide, ride, saveRide }: AdminProps) {
         </label>
       </div>
 
+      <div>
+        <label>
+          1st Park
+          <select
+            className="date-time-input"
+            value={seedPark1}
+            onChange={(e) => setSeedPark1(e.target.value)}
+          >
+            <option value="">Random</option>
+
+            {parks.map((park) => (
+              <option key={park.name} value={park.name}>
+                {park.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div>
+        <label>
+          2nd Park
+          <select
+            className="date-time-input"
+            value={seedPark2}
+            onChange={(e) => setSeedPark2(e.target.value)}
+          >
+            <option value="">Random</option>
+
+            {parks.map((park) => (
+              <option key={park.name} value={park.name}>
+                {park.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       <div className="admin-buttons">
-        <button onClick={() => generateRide(date, time)}>Generate</button>
+        <button onClick={() => generateRide(date, time, seedPark1, seedPark2)}>
+          Generate
+        </button>
       </div>
 
       {ride && (
